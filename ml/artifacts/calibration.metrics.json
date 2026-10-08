@@ -1,0 +1,58 @@
+{
+ "pairs_total": 66375,
+ "pairs_per_bus": {
+  "BUS_CHNAM_01": 22931,
+  "BUS_CHNAM_02": 22590,
+  "BUS_MGBSEC_01": 12448,
+  "BUS_PGHTC_01": 8406
+ },
+ "per_bus_last_90_days": {
+  "BUS_CHNAM_01": {
+   "raw_mean_rel_error": 0.6519930709871042,
+   "corrected_mean_rel_error": 0.10237250057601371,
+   "improvement": 0.8429852936611368,
+   "pairs": 5655,
+   "injected_drift_per_day": 0.0015
+  },
+  "BUS_CHNAM_02": {
+   "raw_mean_rel_error": 0.106514197306747,
+   "corrected_mean_rel_error": 0.10067501349759715,
+   "improvement": 0.054820708945810814,
+   "pairs": 5590,
+   "injected_drift_per_day": 0.0
+  },
+  "BUS_MGBSEC_01": {
+   "raw_mean_rel_error": 0.28001357923128234,
+   "corrected_mean_rel_error": 0.1009599186253233,
+   "improvement": 0.6394463479146717,
+   "pairs": 3070,
+   "injected_drift_per_day": -0.001
+  },
+  "BUS_PGHTC_01": {
+   "raw_mean_rel_error": 0.10408995083709348,
+   "corrected_mean_rel_error": 0.10170067735100305,
+   "improvement": 0.02295393039266369,
+   "pairs": 2038,
+   "injected_drift_per_day": 0.0
+  }
+ },
+ "gain_tracking": {
+  "BUS_CHNAM_01": {
+   "rmse_gain_vs_ideal": 0.017995164074356744,
+   "final_gain": 0.5449126696307013,
+   "initial_gain": 0.8351689191414835,
+   "ideal_final_gain": 0.555203658892406
+  },
+  "BUS_MGBSEC_01": {
+   "rmse_gain_vs_ideal": 0.03489177555386028,
+   "final_gain": 1.3378587903491337,
+   "initial_gain": 0.8983593255020261,
+   "ideal_final_gain": 1.3849706268156237
+  }
+ },
+ "settings": {
+  "pair_km": 0.4,
+  "window_days": 30,
+  "min_pairs": 40
+ }
+}

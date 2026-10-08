@@ -1,0 +1,26 @@
+# Aeronex - Python 3.11
+# Phase 0/1 (installed now)
+pydantic>=2.6,<3
+requests>=2.31
+numpy>=1.26
+osmnx>=2.0          # bus-route geometry (simulator only; routes are cached after first run)
+pytest>=8.0
+
+# Phase 2+ (backend / worker / dashboard) - listed so the stack is pinned up front
+fastapi>=0.110
+uvicorn[standard]>=0.27
+sqlalchemy>=2.0
+alembic>=1.13
+httpx>=0.27
+websockets>=12
+python-dotenv>=1.0
+pandas>=2.1
+scikit-learn>=1.4
+joblib>=1.3
+scipy>=1.11
+statsmodels>=0.14      # STL decomposition (ml/trends.py)
+pyarrow>=15            # parquet training data (ml/data.py)
+apscheduler>=3.10,<4
+streamlit>=1.32
+folium>=0.16
+streamlit-folium>=0.19

@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "device_id": "ZONE_HITEC_01",
+  "sequence": 1,
+  "timestamp_utc": "2026-12-10T03:30:06Z",
+  "gps": {
+    "lat": 17.443688,
+    "lon": 78.377368,
+    "fix": true,
+    "hdop": 1.1,
+    "speed_kmh": 0.0
+  },
+  "env": {
+    "temperature_c": 21.4,
+    "humidity_pct": 54.3,
+    "pressure_hpa": 951.4
+  },
+  "pm": {
+    "pm25_ugm3": 86.3,
+    "pm10_ugm3": 213.6
+  },
+  "gas_proxy": {
+    "mq2_adc": 1122,
+    "mq9_adc": 1703,
+    "mq135_adc": 1581
+  },
+  "quality": {
+    "warmup": true,
+    "gps_valid": true,
+    "sensor_flags": 0
+  },
+  "firmware_version": "0.1.0",
+  "calibration_version": "prototype-0"
+}

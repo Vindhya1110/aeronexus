@@ -1,0 +1,100 @@
+{
+ "hotspots": {
+  "clusters": 4,
+  "zones_with_hotspots": [
+   "CHNAM",
+   "IDAPASH",
+   "SANATH"
+  ],
+  "spearman_vs_zone_mean_pm25": 1.0,
+  "top2_found": [
+   "IDAPASH",
+   "SANATH"
+  ],
+  "top2_truth": [
+   "IDAPASH",
+   "SANATH"
+  ],
+  "top2_overlap": 2,
+  "table": [
+   {
+    "rank": 1,
+    "lat": 17.532,
+    "lon": 78.192,
+    "radius_m": 321.589,
+    "mean_aqi": 161.185,
+    "vs_city": 1.867,
+    "persistence": 0.997,
+    "cells": 2,
+    "samples": 105120,
+    "days_observed": 365,
+    "score": 176.579,
+    "zone": "IDAPASH"
+   },
+   {
+    "rank": 2,
+    "lat": 17.456,
+    "lon": 78.444,
+    "radius_m": 321.692,
+    "mean_aqi": 146.345,
+    "vs_city": 1.612,
+    "persistence": 0.997,
+    "cells": 2,
+    "samples": 105119,
+    "days_observed": 365,
+    "score": 160.326,
+    "zone": "SANATH"
+   },
+   {
+    "rank": 3,
+    "lat": 17.368,
+    "lon": 78.476,
+    "radius_m": 1209.884,
+    "mean_aqi": 110.212,
+    "vs_city": 1.14,
+    "persistence": 0.528,
+    "cells": 12,
+    "samples": 109663,
+    "days_observed": 365,
+    "score": 149.165,
+    "zone": "CHNAM"
+   },
+   {
+    "rank": 4,
+    "lat": 17.387,
+    "lon": 78.472,
+    "radius_m": 506.286,
+    "mean_aqi": 110.283,
+    "vs_city": 1.144,
+    "persistence": 0.521,
+    "cells": 5,
+    "samples": 33181,
+    "days_observed": 365,
+    "score": 102.877,
+    "zone": "CHNAM"
+   }
+  ]
+ },
+ "anomaly": {
+  "threshold": 0.6644164046775225,
+  "stat": {
+   "episodes_total": 67,
+   "episodes_detected": 48,
+   "episode_recall": 0.7164179104477612,
+   "alerts": 273,
+   "alert_precision": 0.18315018315018314,
+   "false_alerts_per_week": 43.36111111111111
+  },
+  "if": {
+   "episodes_total": 67,
+   "episodes_detected": 57,
+   "episode_recall": 0.8507462686567164,
+   "alerts": 147,
+   "alert_precision": 0.4217687074829932,
+   "false_alerts_per_week": 16.527777777777775
+  },
+  "either": {
+   "episode_recall": 0.8955223880597015
+  }
+ }
+}

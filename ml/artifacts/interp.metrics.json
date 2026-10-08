@@ -1,0 +1,18 @@
+{
+ "snapshots": 300,
+ "auto_selector_mae": 26.67600038193299,
+ "auto_predictions": 880,
+ "leave_one_device_out_mae": {
+  "gp": 30.131012696490956,
+  "idw": 27.05826270089139,
+  "nearest": 29.682383993377805,
+  "city_mean": 31.14351015957535
+ },
+ "leave_one_zone_out_mae": {
+  "gp": 33.877729939566144,
+  "idw": 31.210802692696213,
+  "city_mean": 32.36662779070732
+ },
+ "gp_95pct_interval_coverage": 0.7527272727272727,
+ "predictions": 3300
+}

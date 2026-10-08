@@ -1,0 +1,10 @@
+﻿__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+*.db
+.env
+# raw exports / replay files stay local; only sample fixtures are tracked
+data/*
+!data/.gitkeep
+!data/sample_*

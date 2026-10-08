@@ -1,0 +1,41 @@
+{
+ "PGPT": {
+  "sites": {
+   "school": 6,
+   "kindergarten": 0,
+   "college": 4,
+   "hospital": 19,
+   "clinic": 9,
+   "nursing_home": 0
+  },
+  "buildings": 7397,
+  "radius_m": 1500,
+  "source": "OpenStreetMap via osmnx"
+ },
+ "CHNAM": {
+  "sites": {
+   "school": 4,
+   "kindergarten": 0,
+   "college": 8,
+   "hospital": 27,
+   "clinic": 11,
+   "nursing_home": 0
+  },
+  "buildings": 9557,
+  "radius_m": 1500,
+  "source": "OpenStreetMap via osmnx"
+ },
+ "HITEC": {
+  "sites": {
+   "school": 16,
+   "kindergarten": 7,
+   "college": 8,
+   "hospital": 15,
+   "clinic": 8,
+   "nursing_home": 0
+  },
+  "buildings": 5087,
+  "radius_m": 1500,
+  "source": "OpenStreetMap via osmnx"
+ }
+}

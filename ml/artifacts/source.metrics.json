@@ -1,0 +1,254 @@
+{
+ "classes": [
+  "background",
+  "dust",
+  "industrial",
+  "smoke",
+  "traffic"
+ ],
+ "features": [
+  "pm25",
+  "pm10",
+  "ratio",
+  "pm25_rel",
+  "pm10_rel",
+  "d_mq2",
+  "d_mq9",
+  "d_mq135",
+  "mq2",
+  "mq9",
+  "mq135",
+  "temp",
+  "hum",
+  "hour_sin",
+  "hour_cos",
+  "rush",
+  "dow",
+  "tag_traffic",
+  "tag_industrial",
+  "tag_construction",
+  "tag_dense_market"
+ ],
+ "split": "blocked 40-day cycles (ml/splits.py)",
+ "report": {
+  "ml_5class": {
+   "accuracy": 0.9863200874485597,
+   "macro_f1": 0.9467683809607161,
+   "per_class": {
+    "traffic": {
+     "recall": 0.9819853213729706,
+     "precision": 0.9963518748354583,
+     "support": 26978
+    },
+    "dust": {
+     "recall": 0.9799833194328608,
+     "precision": 0.8834586466165414,
+     "support": 2398
+    },
+    "smoke": {
+     "recall": 0.9658002735978112,
+     "precision": 0.7270854788877446,
+     "support": 731
+    },
+    "industrial": {
+     "recall": 0.9877439620989752,
+     "precision": 0.9953297701209071,
+     "support": 19419
+    },
+    "background": {
+     "recall": 0.9957419965305156,
+     "precision": 0.9930014940630651,
+     "support": 12682
+    }
+   },
+   "confusion": [
+    [
+     26492,
+     267,
+     75,
+     67,
+     77
+    ],
+    [
+     35,
+     2350,
+     0,
+     10,
+     3
+    ],
+    [
+     3,
+     0,
+     706,
+     13,
+     9
+    ],
+    [
+     24,
+     41,
+     173,
+     19181,
+     0
+    ],
+    [
+     35,
+     2,
+     17,
+     0,
+     12628
+    ]
+   ],
+   "labels": [
+    "traffic",
+    "dust",
+    "smoke",
+    "industrial",
+    "background"
+   ]
+  },
+  "ml_4class": {
+   "accuracy": 0.9893100565843621,
+   "macro_f1": 0.9766542529437311,
+   "per_class": {
+    "traffic": {
+     "recall": 0.9819853213729706,
+     "precision": 0.9963518748354583,
+     "support": 26978
+    },
+    "dust": {
+     "recall": 0.9799833194328608,
+     "precision": 0.8834586466165414,
+     "support": 2398
+    },
+    "smoke": {
+     "recall": 0.9961786600496277,
+     "precision": 0.9916510226262227,
+     "support": 20150
+    },
+    "insufficient": {
+     "recall": 0.9957419965305156,
+     "precision": 0.9930014940630651,
+     "support": 12682
+    }
+   },
+   "confusion": [
+    [
+     26492,
+     267,
+     142,
+     77
+    ],
+    [
+     35,
+     2350,
+     10,
+     3
+    ],
+    [
+     27,
+     41,
+     20073,
+     9
+    ],
+    [
+     35,
+     2,
+     17,
+     12628
+    ]
+   ],
+   "labels": [
+    "traffic",
+    "dust",
+    "smoke",
+    "insufficient"
+   ]
+  },
+  "rules_4class": {
+   "accuracy": 0.42923739711934156,
+   "macro_f1": 0.2880764996196699,
+   "per_class": {
+    "traffic": {
+     "recall": 0.4840240195715027,
+     "precision": 0.9025435443737905,
+     "support": 26978
+    },
+    "dust": {
+     "recall": 0.002085070892410342,
+     "precision": 1.0,
+     "support": 2398
+    },
+    "smoke": {
+     "recall": 0.048089330024813894,
+     "precision": 0.9989690721649485,
+     "support": 20150
+    },
+    "insufficient": {
+     "recall": 0.9990537770067812,
+     "precision": 0.27092911365337324,
+     "support": 12682
+    }
+   },
+   "confusion": [
+    [
+     13058,
+     0,
+     0,
+     13920
+    ],
+    [
+     333,
+     5,
+     1,
+     2059
+    ],
+    [
+     1065,
+     0,
+     969,
+     18116
+    ],
+    [
+     12,
+     0,
+     0,
+     12670
+    ]
+   ],
+   "labels": [
+    "traffic",
+    "dust",
+    "smoke",
+    "insufficient"
+   ]
+  },
+  "test_rows": 62208,
+  "class_share_test": {
+   "traffic": 0.4336741255144033,
+   "dust": 0.03854809670781893,
+   "smoke": 0.011750900205761318,
+   "industrial": 0.3121624228395062,
+   "background": 0.20386445473251028
+  },
+  "abstention_5class": {
+   "0.5": {
+    "coverage": 0.9997588734567902,
+    "accuracy_when_answering": 0.9864293409226119
+   },
+   "0.6": {
+    "coverage": 0.9932323816872428,
+    "accuracy_when_answering": 0.9891886642821306
+   },
+   "0.7": {
+    "coverage": 0.9866255144032922,
+    "accuracy_when_answering": 0.9917557351407716
+   },
+   "0.8": {
+    "coverage": 0.9780092592592593,
+    "accuracy_when_answering": 0.9940664036817883
+   }
+  }
+ },
+ "seconds": 237,
+ "note": "labels from simulator ground truth; method demonstration, needs field labels on real hardware"
+}

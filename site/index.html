@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aeronex - zone-by-zone air quality intelligence for Hyderabad</title>
+  <meta name="description" content="Aeronex turns low-cost sensors into zone-level AQI, pollution-source hypotheses, anomaly alerts and short-term forecasts for Hyderabad.">
+  <meta name="theme-color" content="#06202b">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header class="nav" id="nav">
+    <div class="wrap nav-in">
+      <a class="brand" href="#home" aria-label="Aeronex home">
+        <svg class="logo" viewBox="0 0 48 48" aria-hidden="true">
+          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5eead4"/><stop offset="1" stop-color="#38bdf8"/></linearGradient></defs>
+          <circle cx="24" cy="24" r="21" fill="none" stroke="url(#lg)" stroke-width="3"/>
+          <path d="M8 27c6 0 6-7 12-7s6 7 12 7 5-4 8-4" fill="none" stroke="url(#lg)" stroke-width="3" stroke-linecap="round"/>
+          <path d="M12 34c5 0 5-5 10-5s5 5 10 5 4-3 6-3" fill="none" stroke="url(#lg)" stroke-width="2.4" stroke-linecap="round" opacity=".6"/>
+          <circle cx="33" cy="14" r="2.6" fill="#5eead4"/>
+        </svg>
+        <span>Aeronex</span>
+      </a>
+      <nav class="links" id="links" aria-label="Main">
+        <a href="#home">Home</a>
+        <a href="#live">Live snapshot</a>
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#access">Who it's for</a>
+        <a href="#" class="m-only" id="mobAuth" data-login>Login</a>
+      </nav>
+      <div class="nav-auth" id="navAuth"><a class="btn btn-primary nav-cta" href="#" data-login>Login to view stats</a></div>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="links"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ===================== HERO ===================== -->
+    <section class="hero" id="home">
+      <canvas id="sky" aria-hidden="true"></canvas>
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="wrap hero-in">
+        <div class="hero-copy">
+          <span class="pill"><i class="dot"></i> Hyderabad &middot; 6 zones &middot; 11 sensor nodes</span>
+          <h1>Know the air you breathe, <span class="grad">zone by zone.</span></h1>
+          <p class="lead">Aeronex turns low-cost sensors on city corridors and buses into live zone AQI, a transparent guess at <em>what</em> is polluting, early anomaly alerts and short-term forecasts.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary btn-lg" href="#" data-login>Login to view stats <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            <a class="btn btn-ghost btn-lg" href="#live">See live air quality</a>
+          </div>
+          <ul class="trust">
+            <li><b>PM2.5 &amp; PM10</b> CPCB-band AQI</li>
+            <li><b>Source hints</b> smoke / traffic / dust</li>
+            <li><b>60&nbsp;min</b> forecast horizon</li>
+          </ul>
+        </div>
+
+        <div class="gauge-card" aria-live="polite">
+          <div class="gauge-top"><span class="live-dot"></span> City average, right now</div>
+          <div class="gauge">
+            <svg viewBox="0 0 200 200" aria-hidden="true">
+              <circle class="g-bg" cx="100" cy="100" r="84"/>
+              <circle class="g-fg" id="gArc" cx="100" cy="100" r="84"/>
+            </svg>
+            <div class="g-center">
+              <div class="g-num" id="gNum">--</div>
+              <div class="g-cat" id="gCat">connecting&hellip;</div>
+            </div>
+          </div>
+          <div class="g-foot" id="gFoot">Indicative AQI from prototype sensors</div>
+          <div class="g-scale" aria-hidden="true"><i style="--c:#00b050"></i><i style="--c:#92d050"></i><i style="--c:#ffc000"></i><i style="--c:#ff7c00"></i><i style="--c:#ff0000"></i><i style="--c:#800000"></i></div>
+        </div>
+      </div>
+      <div class="wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path class="w1" d="M0 70c120 30 240 30 360 0s240-30 360 0 240 30 360 0 240-30 360 0v50H0z"/><path class="w2" d="M0 85c120-25 240-25 360 0s240 25 360 0 240-25 360 0 240 25 360 0v35H0z"/></svg>
+      </div>
+    </section>
+
+    <!-- ===================== LIVE SNAPSHOT ===================== -->
+    <section class="sec" id="live">
+      <div class="wrap">
+        <header class="sec-head reveal">
+          <span class="eyebrow">Live snapshot</span>
+          <h2>Six corridors. One honest picture.</h2>
+          <p>Each card is a Hyderabad pollution corridor with its current indicative AQI. Updates every few seconds while sensors are streaming.</p>
+        </header>
+        <div class="zones" id="zones">
+          <!-- filled by app.js -->
+        </div>
+        <div class="stat-strip reveal">
+          <div><b data-count="6" id="stZones">6</b><span>zones monitored</span></div>
+          <div><b data-count="11" id="stNodes">11</b><span>sensor nodes</span></div>
+          <div><b id="stOnline">--</b><span>nodes online now</span></div>
+          <div><b id="stWorst">--</b><span>highest zone right now</span></div>
+        </div>
+        <p class="center reveal"><a class="btn btn-primary" href="#" data-login>Login for detailed stats, maps &amp; forecasts</a></p>
+      </div>
+    </section>
+
+    <!-- ===================== FEATURES ===================== -->
+    <section class="sec alt" id="features">
+      <div class="wrap">
+        <header class="sec-head reveal">
+          <span class="eyebrow">What you get</span>
+          <h2>From raw sensor counts to decisions.</h2>
+          <p>A full pipeline, not just a chart: validation, analytics, explainable attribution and alerts.</p>
+        </header>
+        <div class="cards">
+          <article class="card reveal"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 18V9m5 9V5m5 13v-7m5 7V8" /></svg></div><h3>Zone AQI</h3><p>CPCB-band AQI from PM2.5/PM10, smoothed per zone, with the raw readings always one click away.</p><span class="tag pub">Public</span></article>
+          <article class="card reveal"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg></div><h3>Live map</h3><p>Corridors coloured by AQI with moving bus nodes. Falls back to an offline map when there is no internet.</p><span class="tag pub">Public</span></article>
+          <article class="card reveal"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 17l5-6 4 3 4-7 5 5"/><path d="M3 21h18" /></svg></div><h3>Short-term forecast</h3><p>15, 30 and 60 minute outlook, persistence versus trend, each labelled with the method that produced it.</p><span class="tag pub">Public</span></article>
+          <article class="card reveal"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-5-5"/></svg></div><h3>Source insight</h3><p>Is it traffic, dust or smoke? A transparent rule-based hypothesis with a confidence score &mdash; and it abstains when unsure.</p><span class="tag off">Officials</span></article>
+          <article class="card reveal"><div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3 2 21h20L12 3z"/><path d="M12 10v5m0 3v.01"/></svg></div><h3>Anomaly events</h3><p>Deviations from each zone's own baseline become events that move through detected, confirmed and recommended action.</p><span class="tag off">Officials</span></article>
+          <article class="card reveal"><div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div><h3>Node health</h3><p>Online status, GPS validity, warm-up and sensor faults for every fixed and bus-mounted node.</p><span class="tag off">Officials</span></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== HOW IT WORKS ===================== -->
+    <section class="sec" id="how">
+      <div class="wrap">
+        <header class="sec-head reveal">
+          <span class="eyebrow">How it works</span>
+          <h2>Four steps from street to screen.</h2>
+        </header>
+        <ol class="steps">
+          <li class="reveal"><span class="n">1</span><h3>Sense</h3><p>PM2.5/PM10 and gas-proxy sensors on corridor poles and city buses.</p></li>
+          <li class="reveal"><span class="n">2</span><h3>Collect</h3><p>A gateway forwards packets to the API, which validates, de-duplicates and stores them. Nothing is lost if the link drops.</p></li>
+          <li class="reveal"><span class="n">3</span><h3>Analyse</h3><p>The worker computes AQI, baselines, source hypotheses, anomalies and forecasts.</p></li>
+          <li class="reveal"><span class="n">4</span><h3>Act</h3><p>Dashboards for the public and officials, with recommended actions for open events.</p></li>
+        </ol>
+        <div class="honest reveal">
+          <b>Honest by design.</b> Gas sensors are raw proxy indices, never claimed as concentrations. Source labels say <em>probable</em>. AQI is indicative, not the official 24-hour figure.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ACCESS ===================== -->
+    <section class="sec alt" id="access">
+      <div class="wrap">
+        <header class="sec-head reveal">
+          <span class="eyebrow">Who it's for</span>
+          <h2>One platform, two views.</h2>
+        </header>
+        <div class="two">
+          <article class="role reveal">
+            <h3>Citizens</h3>
+            <p>Create a free account to see zone AQI, the live map, zone history and forecasts.</p>
+            <ul><li>Zone AQI &amp; raw PM readings</li><li>Live map of corridors</li><li>15&ndash;60 min forecast</li></ul>
+            <a class="btn btn-ghost" href="#" data-login="signup">Create an account</a>
+          </article>
+          <article class="role strong reveal">
+            <h3>Officials &amp; operators</h3>
+            <p>Accounts are issued by an administrator. Everything above, plus the operational layer.</p>
+            <ul><li>Source insight with confidence</li><li>Anomaly events &amp; recommended actions</li><li>Node health &amp; account management</li></ul>
+            <a class="btn btn-primary" href="#" data-login>Official login</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CTA ===================== -->
+    <section class="sec about" id="start">
+      <div class="wrap">
+        <div class="cta-box wide reveal">
+          <h3>Ready to see the numbers?</h3>
+          <p>Sign in to open the Aeronex dashboard: map, forecasts and more.</p>
+          <a class="btn btn-primary btn-lg" href="#" data-login>Login to view stats</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <div class="foot-brand">
+        <a class="brand" href="#home"><svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="none" stroke="#5eead4" stroke-width="3"/><path d="M8 27c6 0 6-7 12-7s6 7 12 7 5-4 8-4" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/></svg><span>Aeronex</span></a>
+        <p>Zonal air-quality intelligence for Hyderabad.</p>
+      </div>
+      <div><h4>Explore</h4><a href="#live">Live snapshot</a><a href="#features">Features</a><a href="#how">How it works</a><a href="#access">Who it's for</a></div>
+      <div><h4>Access</h4><a href="#" data-login>Login</a><a href="#" data-login="signup">Create account</a><a href="/docs">API docs</a></div>
+    </div>
+    <div class="wrap foot-bot">
+      <span>&copy; 2026 Aeronex. Prototype &mdash; sensor data is simulated; AQI is indicative and not an official reading.</span>
+      <a href="#home" class="totop">Back to top &uarr;</a>
+    </div>
+  </footer>
+
+  <!-- ===================== LOGIN MODAL (one sign-in for the website and the dashboard) ===================== -->
+  <div class="modal" id="loginModal" hidden role="dialog" aria-modal="true" aria-labelledby="lmTitle">
+    <div class="modal-card">
+      <button class="modal-x" id="lmClose" aria-label="Close">&times;</button>
+      <div class="modal-brand"><svg class="logo" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="none" stroke="#5eead4" stroke-width="3"/><path d="M8 27c6 0 6-7 12-7s6 7 12 7 5-4 8-4" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round"/></svg><span>Aeronex</span></div>
+      <h3 id="lmTitle">Sign in to view stats</h3>
+      <div class="tabs" role="tablist">
+        <button class="tab on" data-tab="in" role="tab">Sign in</button>
+        <button class="tab" data-tab="up" role="tab">Create account</button>
+      </div>
+      <form id="formIn" autocomplete="on">
+        <label>Username<input id="inUser" name="username" autocomplete="username" required></label>
+        <label>Password<input id="inPass" name="password" type="password" autocomplete="current-password" required></label>
+        <p class="err" id="inErr" role="alert"></p>
+        <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+        <p class="hint">Officials: use the account issued by your administrator.</p>
+      </form>
+      <form id="formUp" hidden autocomplete="off">
+        <label>Your name (optional)<input id="upName" name="name"></label>
+        <label>Choose a username<input id="upUser" name="username" autocomplete="username" required minlength="3" maxlength="32"></label>
+        <label>Choose a password<input id="upPass" name="password" type="password" autocomplete="new-password" required minlength="8"></label>
+        <label>Repeat password<input id="upPass2" type="password" autocomplete="new-password" required></label>
+        <p class="err" id="upErr" role="alert"></p>
+        <button class="btn btn-primary btn-block" type="submit">Create public account</button>
+        <p class="hint">Public accounts see air quality, map and forecasts. Official accounts are issued by an administrator.</p>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

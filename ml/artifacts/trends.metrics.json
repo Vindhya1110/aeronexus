@@ -1,0 +1,150 @@
+{
+ "one_year_zones": {
+  "CHNAM": {
+   "trend_identifiable": false,
+   "weekly_strength": 0.5114258481859784,
+   "latest_month_mean": 62.57753809245069,
+   "mom_change_last": 0.10196104860202349
+  },
+  "HITEC": {
+   "trend_identifiable": false,
+   "weekly_strength": 0.8111854958560646,
+   "latest_month_mean": 45.581938657407406,
+   "mom_change_last": 0.17184204704101558
+  },
+  "IDAPASH": {
+   "trend_identifiable": false,
+   "weekly_strength": 0.030341931689362722,
+   "latest_month_mean": 78.00329062899105,
+   "mom_change_last": 0.2012154756265545
+  },
+  "MGBSEC": {
+   "trend_identifiable": false,
+   "weekly_strength": 0.6873389452215029,
+   "latest_month_mean": 62.27945295870583,
+   "mom_change_last": 0.1284547366249853
+  },
+  "PGPT": {
+   "trend_identifiable": false,
+   "weekly_strength": 0.6584199547906742,
+   "latest_month_mean": 51.11696774780048,
+   "mom_change_last": 0.1093723134816027
+  },
+  "SANATH": {
+   "trend_identifiable": false,
+   "weekly_strength": 0.19758561512560513,
+   "latest_month_mean": 74.92086286717752,
+   "mom_change_last": 0.15842850455468005
+  }
+ },
+ "two_year_control_zones": {
+  "CHNAM": {
+   "trend_identifiable": true,
+   "slope_per_month": -0.0,
+   "slope_ci_per_month": [
+    -1.8581074552350145e-15,
+    2.009348759730888e-15
+   ],
+   "kendall_tau": 0.00246831577324072,
+   "p_value": 0.9214122359204342,
+   "significant": false,
+   "weekly_strength": 0.9999999999999728,
+   "trend_strength": 0.9999999999999728,
+   "latest_month_mean": 62.57753809245069,
+   "mom_change_last": 0.10196104860202349
+  },
+  "HITEC": {
+   "trend_identifiable": true,
+   "slope_per_month": 2.2268555842378397e-15,
+   "slope_ci_per_month": [
+    -0.0,
+    3.823097197718061e-15
+   ],
+   "kendall_tau": 0.07417954426380731,
+   "p_value": 0.003151316207272069,
+   "significant": false,
+   "weekly_strength": 0.9999999999999792,
+   "trend_strength": 0.9999999999999792,
+   "latest_month_mean": 45.581938657407406,
+   "mom_change_last": 0.17184204704101558
+  },
+  "IDAPASH": {
+   "trend_identifiable": true,
+   "slope_per_month": 2.5907645177939484e-15,
+   "slope_ci_per_month": [
+    -0.0,
+    6.000138657529734e-15
+   ],
+   "kendall_tau": 0.04492072647158053,
+   "p_value": 0.07344612636708962,
+   "significant": false,
+   "weekly_strength": 0.9999999999999251,
+   "trend_strength": 0.9999999999999251,
+   "latest_month_mean": 78.00329062899105,
+   "mom_change_last": 0.2012154756265545
+  },
+  "MGBSEC": {
+   "trend_identifiable": true,
+   "slope_per_month": -0.0,
+   "slope_ci_per_month": [
+    -2.7170439203908235e-15,
+    7.659751477697533e-16
+   ],
+   "kendall_tau": -0.021744945382877884,
+   "p_value": 0.3852044315986143,
+   "significant": false,
+   "weekly_strength": 0.9999999999999881,
+   "trend_strength": 0.9999999999999881,
+   "latest_month_mean": 62.27945295870583,
+   "mom_change_last": 0.1284547366249853
+  },
+  "PGPT": {
+   "trend_identifiable": true,
+   "slope_per_month": -3.0748041519013585e-15,
+   "slope_ci_per_month": [
+    -4.747362454309241e-15,
+    -1.2706175980651202e-15
+   ],
+   "kendall_tau": -0.09198579191966205,
+   "p_value": 0.0002458957881348355,
+   "significant": false,
+   "weekly_strength": 0.9999999999999929,
+   "trend_strength": 0.9999999999999929,
+   "latest_month_mean": 51.11696774780048,
+   "mom_change_last": 0.1093723134816027
+  },
+  "SANATH": {
+   "trend_identifiable": true,
+   "slope_per_month": -2.8515510451626463e-15,
+   "slope_ci_per_month": [
+    -6.238411311799869e-15,
+    -0.0
+   ],
+   "kendall_tau": -0.04806215110340285,
+   "p_value": 0.05545514218187954,
+   "significant": false,
+   "weekly_strength": 0.999999999999949,
+   "trend_strength": 0.999999999999949,
+   "latest_month_mean": 74.92086286717752,
+   "mom_change_last": 0.15842850455468005
+  }
+ },
+ "injected_decline": {
+  "zone": "HITEC",
+  "true": "x(1 - 0.3%/day) for 180 days: -54% by the end, average level -26.9% over the window",
+  "trend_component_change_over_window_pct": -0.049664484048856594,
+  "true_change_over_window_pct": -0.537,
+  "theil_sen_slope_in_window_per_month": -0.5783587665334835
+ },
+ "year_over_year_impact": {
+  "before_mean_same_days_last_year": 54.813285108024694,
+  "after_mean": 42.26052318672839,
+  "change_pct": -0.22900948002947868,
+  "ci95_pct": [
+   -0.2987426586149337,
+   -0.1716044873273728
+  ],
+  "n_days": 180,
+  "true_average_change_pct": -0.26849999999999996
+ }
+}
