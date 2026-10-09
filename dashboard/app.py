@@ -181,6 +181,11 @@ zdata = safe("/v1/zones")
 if not zdata:
     st.stop()
 zones = zdata["zones"]
+if all(z.get("current") is None for z in zones):
+    # the backend is up but nothing has ever been sent to it (e.g. it was started on its own): say what to do instead of showing empty cards
+    st.warning("**No sensor data yet.** The dashboard and API are running, but no readings have reached the backend. "
+               "Start the full stack, which also loads the demo data and starts the analytics worker and the simulator: "
+               "`python tools/run_demo.py` (see docs/SETUP.md).")
 zone_ids = [z["zone_id"] for z in zones]
 zmap = {z["zone_id"]: z for z in zones}
 
@@ -207,7 +212,7 @@ def overview():
     st.caption("AQI is a PM-only indicative CPCB index from a rolling mean; the PM line is the raw windowed mean.")
     cols = st.columns(3)
     for i, z in enumerate(zones):
-        aqi, cov, cur = z.get("aqi"), z.get("coverage") or {}, z["current"]
+        aqi, cov, cur = z.get("aqi"), z.get("coverage") or {}, z.get("current")
         with cols[i % 3].container(border=True):
             st.subheader(z["name"])
             if aqi:
@@ -216,8 +221,11 @@ def overview():
             else:
                 st.markdown("## - ")
                 st.caption("AQI not computed yet (run the worker)")
-            st.write(f"Raw PM2.5 **{cur['pm25_ugm3']}** / PM10 **{cur['pm10_ugm3']}** ug/m3 "
-                     f"({cur['n_samples']} samples, {cur['window_min']} min)")
+            if cur:
+                st.write(f"Raw PM2.5 **{cur['pm25_ugm3']}** / PM10 **{cur['pm10_ugm3']}** ug/m3 "
+                         f"({cur['n_samples']} samples, {cur['window_min']} min)")
+            else:
+                st.caption("No readings from this zone yet.")
             sh = z.get("source_hypothesis")
             w = warn.get(z["zone_id"])
             if w and w.get("aqi_now") is not None and w["aqi_now"] > 300:
