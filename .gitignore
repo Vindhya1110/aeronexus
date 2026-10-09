@@ -8,3 +8,5 @@
 data/*
 !data/.gitkeep
 !data/sample_*
+
+venv/

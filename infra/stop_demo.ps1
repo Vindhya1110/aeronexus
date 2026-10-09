@@ -5,7 +5,9 @@
   ports, and any python/streamlit/uvicorn process of THIS repo running the simulator, worker, backend or dashboard.
   The sweep exists because `uvicorn --reload` leaves an orphaned server child if only the parent is killed.
 #>
-param([int[]]$Ports = @(8000, 8501))
+param($Ports = @(8000, 8501))
+# `-File stop_demo.ps1 -Ports 8100,8601` arrives as ONE string "8100,8601": split it
+$Ports = @($Ports | ForEach-Object { "$_" -split "[,\s]+" } | Where-Object { $_ } | ForEach-Object { [int]$_ })
 $ErrorActionPreference = "SilentlyContinue"
 $Root = Split-Path -Parent $PSScriptRoot
 $PidFile = Join-Path $Root "data\demo\pids.json"

@@ -17,21 +17,33 @@ Rising-AQI prototype for Hyderabad. Pipeline:
 | `infra/` | done (Phase 5): one-command demo (`run_demo.ps1`), `stop_demo.ps1`, `crash_test.ps1`, `capture_evidence.ps1`, supervisor - see `infra/README.md` |
 | `docs/`, `data/` | `docs/demo_script.md` (presenter run-sheet), `docs/device_ids.md`; `data/` is gitignored except `sample_*` |
 
-```bash
-python -m venv .venv && .venv\Scripts\activate
-pip install -r requirements.txt
-python -m pytest
-python -m simulator sample
-```
-Target Python 3.11 (developed on 3.14; code avoids 3.12+ features).
 
-## Run the demo (Windows / PowerShell)
+## Quick start (fresh clone)
+
+Full guide, troubleshooting and the login explanation: **[docs/SETUP.md](docs/SETUP.md)**. Short version (Python 3.11+):
 
 ```powershell
-.\infra
-un_demo.ps1                  # backend + worker + simulator + dashboard, health-checked (~15-55 s)
-.\infra
-un_demo.ps1 -Mode replay     # fallback: recorded scenario, ~10 s
+# Windows PowerShell
+git clone <repo-url> aeronex ; cd aeronex
+python -m venv venv
+.\venv\Scripts\python.exe -m pip install -r requirements.txt
+.\venv\Scripts\python.exe tools\run_demo.py        # or: powershell -ExecutionPolicy Bypass -File .\infra\run_demo.ps1
+type data\demo\credentials.txt                     # YOUR logins (generated on first run, different on every machine)
+```
+```bash
+# macOS / Linux
+git clone <repo-url> aeronex && cd aeronex
+python3 -m venv venv && ./venv/bin/python -m pip install -r requirements.txt
+./venv/bin/python tools/run_demo.py
+cat data/demo/credentials.txt
+```
+Open **http://localhost:8000** and click *Login to view stats*. `python -m pytest` runs the tests.
+
+## More demo commands (Windows / PowerShell)
+
+```powershell
+.\infra\run_demo.ps1                  # backend + worker + simulator + dashboard, health-checked
+.\infra\run_demo.ps1 -Mode replay     # fallback: recorded scenario
 .\infra\crash_test.ps1 -Auto          # kill the backend mid-stream; prove no data loss
 .\infra\stop_demo.ps1
 ```
