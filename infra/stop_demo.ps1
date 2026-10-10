@@ -29,7 +29,7 @@ if (Test-Path $PidFile) {
 # sweep supervisors before anything else for the same reason
 Get-CimInstance Win32_Process | Sort-Object { $_.CommandLine -notmatch 'supervisor\.ps1' } | Where-Object {
     $_.ProcessId -ne $PID -and $_.CommandLine -and $_.CommandLine.Contains($Root) -and
-    $_.CommandLine -match '(-m simulator|-m worker|uvicorn|streamlit|dashboard\.serve|supervisor\.ps1)'
+    $_.CommandLine -match '(-m simulator|-m worker|gateway\.serial_bridge|uvicorn|streamlit|dashboard\.serve|supervisor\.ps1)'
 } | ForEach-Object { Stop-Tree $_.ProcessId "stray" }
 foreach ($port in $Ports) {
     Get-NetTCPConnection -LocalPort $port -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Stop-Tree $_.OwningProcess "port $port" }

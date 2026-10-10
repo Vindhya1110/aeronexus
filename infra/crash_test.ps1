@@ -64,7 +64,7 @@ $ok = Wait-Until {
 } 60 "fresh simulator status line with buffered=0"
 if ($ok) { Say "    simulator says: $($statusLine.Substring($statusLine.IndexOf('stats=')))" }
 $fresh = (Get-Json "$Url/v1/devices").devices | Where-Object { $_.last_age_s -lt 30 }
-Say "    devices streaming again: $(@($fresh).Count)/11"
+Say "    devices streaming again: $(@($fresh).Count)/$(@((Get-Json "$Url/v1/devices").devices).Count)"
 
 Say "5/5 integrity after recovery"
 & $Py (Join-Path $Root "tools\check_integrity.py") --db $DbPath --compare (Join-Path $DemoDir "integrity_before.json")

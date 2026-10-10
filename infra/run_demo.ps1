@@ -11,7 +11,9 @@ param(
     [int]$Port = 8000,
     [int]$DashPort = 8501,
     [switch]$Rebuild,
-    [switch]$NoBrowser
+    [switch]$NoBrowser,
+    [string]$HardwarePort = "",                 # ESP32 node: serial port (COM5) or "sim" for a synthetic node
+    [string]$HardwareId = "ZONE_HITEC_90"
 )
 $ErrorActionPreference = "Stop"
 . (Join-Path $PSScriptRoot "_demo_lib.ps1")
@@ -63,6 +65,13 @@ if ($Mode -eq "live") {
     $before = [datetime]::UtcNow
     $fresh = { ((Get-Json "$Url/v1/devices").devices | Where-Object { $_.last_age_s -lt 20 }).Count -ge 8 }
     if (-not (Wait-Until $fresh 45 "live packets from >= 8 devices")) { throw "simulator is not delivering: see data\demo\logs\simulator.*.log" }
+}
+
+if ($HardwarePort) {
+    Step "starting ESP32 node bridge ($HardwarePort -> $HardwareId)"
+    $bargs = @("-m", "gateway.serial_bridge", "--url", $Url, "--device-id", $HardwareId, "--fresh")
+    if ($HardwarePort -eq "sim") { $bargs += "--simulate" } else { $bargs += @("--port", $HardwarePort) }
+    Start-Component "bridge" $bargs | Out-Null
 }
 
 Step "starting dashboard"

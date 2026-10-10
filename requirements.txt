@@ -13,6 +13,7 @@ sqlalchemy>=2.0
 alembic>=1.13
 httpx>=0.27
 websockets>=12
+pyserial>=3.5          # ESP32 node serial bridge (gateway/serial_bridge.py)
 python-dotenv>=1.0
 pandas>=2.1
 scikit-learn>=1.4

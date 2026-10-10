@@ -13,7 +13,7 @@ Rising-AQI prototype for Hyderabad. Pipeline:
 | `dashboard/` | done (Phase 4): Streamlit, 7 screens; offline-safe map, deep links (`?screen=Events`), `python -m dashboard.serve` |
 | `ml/` | done (Phase 7): 8 ML/analytics features (forecast, early warning, source classifier, hotspots + anomaly, kriging heatmap, drift correction, risk ranking, trends) - see `docs/ml.md`, measured results in `docs/ml_results.md` |
 | `tools/` | `load_replay.py`, `evaluate_source_hypothesis.py`, demo tooling: `demo_data.py`, `check_integrity.py`, `narrative_fingerprint.py`, `capture_screens.py` |
-| `firmware/`, `gateway/` | out of scope placeholders |
+| `firmware/`, `gateway/` | ESP32-S3 node sketch + USB-serial bridge (`python -m gateway.serial_bridge`), see `firmware/README.md` and `gateway/README.md` |
 | `infra/` | done (Phase 5): one-command demo (`run_demo.ps1`), `stop_demo.ps1`, `crash_test.ps1`, `capture_evidence.ps1`, supervisor - see `infra/README.md` |
 | `docs/`, `data/` | `docs/demo_script.md` (presenter run-sheet), `docs/device_ids.md`; `data/` is gitignored except `sample_*` |
 

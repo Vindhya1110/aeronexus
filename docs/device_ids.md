@@ -16,6 +16,12 @@ BUS_<ROUTECODE>_<NN>    mobile bus node      e.g. BUS_CHNAM_01
 * `(device_id, sequence)` is the de-duplication key. `sequence` increments per packet and survives
   reboots (firmware stores it in flash); gateways may resend a packet with the same pair (store-and-forward).
 
+## Hardware node
+
+| device_id | where |
+|---|---|
+| ZONE_HITEC_90 (default; any `ZONE_<ZONECODE>_<NN>`) | the ESP32-S3 prototype node (`firmware/aeronex_node`), via `gateway/serial_bridge.py`; numbers 90+ are reserved for real hardware so they never clash with the simulated fleet |
+
 ## Current simulated fleet
 
 | device_id | where |

@@ -221,9 +221,11 @@ def overview():
             else:
                 st.markdown("## - ")
                 st.caption("AQI not computed yet (run the worker)")
-            if cur:
+            if cur and cur.get("pm25_ugm3") is not None:
                 st.write(f"Raw PM2.5 **{cur['pm25_ugm3']}** / PM10 **{cur['pm10_ugm3']}** ug/m3 "
                          f"({cur['n_samples']} samples, {cur['window_min']} min)")
+            elif cur:
+                st.caption("No particulate (PM) readings in this zone yet: its nodes report gas / environment only.")
             else:
                 st.caption("No readings from this zone yet.")
             sh = z.get("source_hypothesis")

@@ -78,6 +78,10 @@ on every start, so for a permanent account create it with `tools/create_user.py`
 * The dashboard shows "Sign in to continue": you are not signed in (or signed out); use the button, it goes to the home page login.
 * `data/demo/` is local and git-ignored; deleting it just forces a rebuild.
 
+## 4b. ESP32 sensor node (optional)
+`tools/run_demo.py --hardware COM5` (or `--hardware sim` for a synthetic node, no hardware needed) adds the node to the running stack. Details and what the node can and
+cannot contribute: `firmware/README.md`, `gateway/README.md`.
+
 ## 5. Stop
 `Ctrl+C` in the `tools/run_demo.py` window, or `.\infra\stop_demo.ps1` for the PowerShell launcher.
 

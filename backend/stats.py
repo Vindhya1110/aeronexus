@@ -21,7 +21,8 @@ def zone_devices(devices: list[Device], zone_id: str) -> list[Device]:
 
 def window_stats(db: Session, zone_id: str, since: datetime, until: Optional[datetime] = None,
                  exclude_flagged: bool = False) -> dict:
-    """Plain mean of raw PM in [since, until] plus counts of flagged samples.
+    """Plain mean of raw PM in [since, until] plus counts of flagged samples. n_samples / n_devices count samples that CARRY PM
+    (a node without a PM sensor, e.g. the ESP32 prototype, is a device of the zone but not a PM sample).
 
     exclude_flagged=False (API 'current' block): every sample counts; flagged ones are only counted.
     exclude_flagged=True  (worker): drops warm-up samples, any sensor-fault sample and out-of-range PM.
@@ -35,7 +36,7 @@ def window_stats(db: Session, zone_id: str, since: datetime, until: Optional[dat
                   Measurement.pm10_ugm3 <= PLAUSIBLE_RANGES["pm10_ugm3"][1]]
     row = db.execute(select(
         func.avg(Measurement.pm25_ugm3), func.avg(Measurement.pm10_ugm3),
-        func.count(Measurement.id), func.count(func.distinct(Measurement.device_id)),
+        func.count(Measurement.pm25_ugm3), func.count(func.distinct(case((Measurement.pm25_ugm3.is_not(None), Measurement.device_id)))),
         func.sum(case((Measurement.warmup.is_(True), 1), else_=0)),
         func.sum(case((Measurement.gps_valid.is_(False), 1), else_=0)),
         func.sum(case((Measurement.sensor_flags > 0, 1), else_=0)),

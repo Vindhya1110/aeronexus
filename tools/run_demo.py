@@ -57,6 +57,9 @@ def main() -> int:
     ap.add_argument("--dash-port", type=int, default=8501)
     ap.add_argument("--speedup", type=float, default=12)
     ap.add_argument("--rebuild", action="store_true", help="ignore the cached database snapshot")
+    ap.add_argument("--hardware", metavar="PORT", help="also run the ESP32 node bridge: a serial port (COM5, /dev/ttyACM0) or 'sim' for a synthetic node")
+    ap.add_argument("--hardware-id", default="ZONE_HITEC_90", help="device id of the node (its zone code decides the zone)")
+    ap.add_argument("--hardware-interval", type=int, default=30, help="seconds per packet from the node (window mean)")
     a = ap.parse_args()
 
     for p in (a.port, a.dash_port):
@@ -122,6 +125,11 @@ def main() -> int:
             start("simulator", "-m", "simulator", "live", "--scenario", "demo", "--no-faults", "--offline-routes", "--url", base,
                   "--start", LIVE_START, "--speedup", str(a.speedup))
             wait(lambda: sum(1 for d in get_json(f"{base}/v1/devices", auth)["devices"] if d["last_age_s"] < 20) >= 8, 60, "live packets from >= 8 devices")
+        if a.hardware:
+            print(f"[{time.time() - t0:5.1f}s] starting ESP32 node bridge ({'synthetic node' if a.hardware == 'sim' else a.hardware} -> {a.hardware_id})")
+            bridge = ["-m", "gateway.serial_bridge", "--url", base, "--device-id", a.hardware_id, "--interval-s", str(a.hardware_interval),
+                      "--fresh"]                                          # the demo database was just recreated: restart the node's sequence at 1
+            start("bridge", *bridge, *(["--simulate"] if a.hardware == "sim" else ["--port", a.hardware]))
         print(f"[{time.time() - t0:5.1f}s] starting dashboard")
         start("dashboard", "-m", "dashboard.serve", "--port", str(a.dash_port))
         wait(lambda: urllib.request.urlopen(f"http://127.0.0.1:{a.dash_port}/app/_stcore/health", timeout=3).read() == b"ok", 60, "dashboard health")

@@ -25,7 +25,10 @@ def inspect(db: Path) -> dict:
     for dev, n, distinct, mx in con.execute(
             "SELECT device_id, COUNT(*), COUNT(DISTINCT sequence), MAX(sequence) FROM raw_measurements GROUP BY device_id"):
         have = {r[0] for r in con.execute("SELECT sequence FROM raw_measurements WHERE device_id=?", (dev,))}
-        missing = sorted(set(range(1, mx + 1)) - have)
+        # a device that joined mid-stream (e.g. the ESP32 node, whose sequence numbers survive a database reset) starts above 1:
+        # loss is then measured inside [first, last]; simulated devices always start at 1 so the whole range is checked
+        first = min(have)
+        missing = sorted(set(range(first if first > 1 else 1, mx + 1)) - have)
         per_dev[dev] = {"rows": n, "distinct": distinct, "max_seq": mx, "duplicates": n - distinct,
                         "missing": len(missing), "missing_sample": missing[:5]}
     typed = con.execute("SELECT COUNT(*) FROM measurements").fetchone()[0]
